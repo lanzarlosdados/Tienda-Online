@@ -1,6 +1,6 @@
 <?php
 
-class SongModel
+class StoreModel
 {
     private $database;
 
@@ -9,8 +9,8 @@ class SongModel
         $this->database = $database;
     }
 
-    public function getCanciones(){
-        return $this->database->query("SELECT * FROM canciones");
+    public function getProductos(){
+        return $this->database->query("SELECT * FROM producto");
     }
 
     public function getCancion($id){

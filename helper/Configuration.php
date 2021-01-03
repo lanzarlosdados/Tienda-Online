@@ -4,11 +4,11 @@ include_once("helper/Render.php");
 include_once("helper/UrlHelper.php");
 
 include_once("model/TourModel.php");
-include_once("model/SongModel.php");
+include_once("model/StoreModel.php");
 
 include_once("controller/SongController.php");
 include_once("controller/TourController.php");
-include_once("controller/LaBandaController.php");
+include_once("controller/StoreController.php");
 include_once("controller/QuieroSerParteController.php");
 
 include_once('third-party/mustache/src/Mustache/Autoloader.php');
@@ -36,7 +36,7 @@ class Configuration{
 
     public function getCancionModel(){
         $database = $this->getDatabase();
-        return new SongModel($database);
+        return new StoreModel($database);
     }
 
     public function getRender(){
@@ -53,8 +53,10 @@ class Configuration{
         return new SongController($cancionesModel, $this->getRender());
     }
 
-    public function getLaBandaController(){
-        return new LaBandaController($this->getRender());
+    public function getStoreController(){
+        $database = $this->getDatabase();
+        $modelUser = new StoreModel($database);
+        return new StoreController($this->getRender(),$modelUser);
     }
 
     public function getQuieroSerParteController(){
